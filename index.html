@@ -13,22 +13,29 @@
 
 <body>
     <main class="app-container">
-        <section class="controls">
-            <input type="text" id="filterInput" placeholder="Search..." autocomplete="off">
-            <div class="pagination">
-                <button id="prevPageBtn" aria-label="Previous page">Prev</button>
-                <span id="pageInfo">Page 1</span>
-                <button id="nextPageBtn" aria-label="Next page">Next</button>
+        <section aria-label="Search and pagination">
+            <div class="controls">
+                <search>
+                    <input type="search" id="filterInput" placeholder="Search..." autocomplete="off">
+                </search>
+                <div class="pagination">
+                    <button id="prevPageBtn" aria-label="Previous page">Prev</button>
+                    <span id="pageInfo" aria-live="polite">Page 1</span>
+                    <button id="nextPageBtn" aria-label="Next page">Next</button>
+                </div>
             </div>
         </section>
 
-        <section>
+        <section aria-label="Data table">
+            <h2 id="table-heading" class="visually-hidden">Posts list</h2>
             <div class="table-wrapper">
-                <table class="posts-table" id="postsTable">
+                <table class="posts-table" id="postsTable" aria-label="Posts with sortable columns">
                     <thead>
                         <tr>
-                            <th scope="col" id="sortId" data-field="id" aria-sort="ascending">Id</th>
-                            <th scope="col" id="sortTitle" data-field="title" aria-sort="none">Title</th>
+                            <th scope="col" id="sortId" data-field="id" aria-sort="ascending" tabindex="0"
+                                aria-label="Sort by ID">Id</th>
+                            <th scope="col" id="sortTitle" data-field="title" aria-sort="none" tabindex="0"
+                                aria-label="Sort by title">Title</th>
                             <th scope="col">Body</th>
                         </tr>
                     </thead>
