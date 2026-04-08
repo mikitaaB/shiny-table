@@ -67,6 +67,11 @@
     overflow-x: auto;
 }
 
+.posts-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
 .posts-table th {
     background: var(--color-bg-header);
     padding: var(--spacing-md) var(--spacing-md);
@@ -83,6 +88,23 @@
     border-bottom: 1px solid var(--color-border);
     vertical-align: top;
     background-color: var(--color-bg-card);
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.posts-table th:nth-child(1),
+.posts-table td:nth-child(1) {
+    width: 80px;
+}
+
+.posts-table th:nth-child(2),
+.posts-table td:nth-child(2) {
+    width: 30%;
+}
+
+.posts-table th:nth-child(3),
+.posts-table td:nth-child(3) {
+    width: auto;
 }
 
 .row-highlight td {
