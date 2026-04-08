@@ -171,6 +171,7 @@
 
     function applyFilter() {
         const searchValue = state.searchValue.trim().toLowerCase();
+        console.log(searchValue)
         state.filteredPosts = searchValue
             ? state.allPosts.filter(post =>
                 post.title.toLowerCase().includes(searchValue) || post.body.toLowerCase().includes(searchValue)
@@ -214,9 +215,11 @@
         highlightRows(tbody);
     }
 
+    const debouncedApplyFilter = debounce(applyFilter);
+
     function onFilterInput(e) {
         state.searchValue = e.target.value;
-        debounce(applyFilter)();
+        debouncedApplyFilter();
     }
 
     function showLoadingState() {
