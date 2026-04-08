@@ -24,14 +24,13 @@ function highlightRows(tbody) {
         row.addEventListener('animationend', () =>
             row.classList.remove('row-highlight'), {
             once: true
-        }
-        );
+        });
     });
 }
 
 function updatePagination(state, pageInfoSpan, prevBtn, nextBtn, ITEMS_PER_PAGE) {
     const totalPages = Math.ceil(state.filteredPosts.length / ITEMS_PER_PAGE) || 1;
-    pageInfoSpan.textContent = `${state.currentPage} of ${totalPages} pages`;
-    prevBtn.disabled = state.currentPage <= 1;
-    nextBtn.disabled = state.currentPage >= totalPages;
+    pageInfoSpan.textContent = `${state.curPage} of ${totalPages} pages`;
+    prevBtn.disabled = state.curPage <= 1;
+    nextBtn.disabled = state.curPage >= totalPages;
 }
