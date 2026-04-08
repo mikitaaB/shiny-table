@@ -1,0 +1,117 @@
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--color-bg-card);
+    overflow: hidden;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    width: 100%;
+}
+
+#filterInput {
+    padding: 10px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    background: var(--color-bg-card);
+    transition: var(--transition-fast);
+    outline: none;
+    width: 300px;
+    text-align: center;
+}
+
+#filterInput:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-shadow);
+    width: 100%;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.pagination button {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-xs) 14px;
+    border-radius: var(--radius-xs);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#pageInfo {
+    font-weight: 500;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.posts-table th {
+    background: var(--color-bg-header);
+    padding: var(--spacing-md) var(--spacing-md);
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-border);
+    cursor: pointer;
+    user-select: none;
+    transition: background var(--transition-fast);
+}
+
+.posts-table td {
+    padding: var(--spacing-md) var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+    background-color: var(--color-bg-card);
+}
+
+.row-highlight td {
+    animation: flashRow 0.6s ease-out;
+}
+
+@keyframes flashRow {
+    0% {
+        background-color: var(--color-flash-start);
+    }
+
+    50% {
+        background-color: var(--color-flash-mid);
+    }
+
+    100% {
+        background-color: var(--color-bg-card);
+    }
+}
+
+.flip-animate {
+    transition: transform 0.6s linear;
+    background-color: var(--color-bg-flip);
+}
+
+th[aria-sort="ascending"]::after,
+th[aria-sort="descending"]::after {
+    font-size: 0.7rem;
+    font-weight: normal;
+}
+
+th[aria-sort="ascending"]::after {
+    content: " asc";
+}
+
+th[aria-sort="descending"]::after {
+    content: " desc";
+}

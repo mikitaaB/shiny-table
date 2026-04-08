@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiny table</title>
+    <link rel="stylesheet" href="css/base/reset.css">
+    <link rel="stylesheet" href="css/base/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/utils/responsive.css">
+</head>
+
+<body>
+    <main class="app-container">
+        <section class="controls">
+            <input type="text" id="filterInput" placeholder="Search..." autocomplete="off">
+            <div class="pagination">
+                <button id="prevPageBtn" aria-label="Previous page">Prev</button>
+                <span id="pageInfo">Page 1</span>
+                <button id="nextPageBtn" aria-label="Next page">Next</button>
+            </div>
+        </section>
+
+        <section>
+            <div class="table-wrapper">
+                <table class="posts-table" id="postsTable">
+                    <thead>
+                        <tr>
+                            <th scope="col" id="sortId" data-field="id" aria-sort="ascending">Id</th>
+                            <th scope="col" id="sortTitle" data-field="title" aria-sort="none">Title</th>
+                            <th scope="col">Body</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script defer src="js/utils.js"></script>
+    <script defer src="js/script.js"></script>
+</body>
+
+</html>

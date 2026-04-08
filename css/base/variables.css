@@ -1,0 +1,26 @@
+:root {
+    --color-bg-card: #ffffff;
+    --color-bg-header: #f1f5f9;
+    --color-bg-flip: #add8e6;
+
+    --color-border: #cbd5e1;
+
+    --color-text-primary: #000000;
+
+    --color-accent: #3b82f6;
+    --color-accent-shadow: #3b82f633;
+
+    --color-flash-start: #f0f4ff;
+    --color-flash-mid: #e0eaff;
+
+    --spacing-xs: 6px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 20px;
+    --spacing-xl: 24px;
+
+    --radius-xs: 10px;
+    --radius-sm: 20px;
+
+    --transition-fast: 0.15s;
+}
