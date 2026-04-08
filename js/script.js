@@ -159,7 +159,7 @@
             };
             tbody.addEventListener('transitionend', transitionEndHandler);
             tbody.addEventListener('webkitTransitionEnd', transitionEndHandler);
-            setTimeout(function () {
+            setTimeout(() => {
                 if (finished < total) {
                     tbody.removeEventListener('transitionend', transitionEndHandler);
                     tbody.removeEventListener('webkitTransitionEnd', transitionEndHandler);
@@ -172,9 +172,9 @@
     function applyFilter() {
         const searchValue = state.searchValue.trim().toLowerCase();
         state.filteredPosts = searchValue
-            ? state.allPosts.filter(function (post) {
-                return post.title.toLowerCase().includes(searchValue) || post.body.toLowerCase().includes(searchValue);
-            })
+            ? state.allPosts.filter(post =>
+                post.title.toLowerCase().includes(searchValue) || post.body.toLowerCase().includes(searchValue)
+            )
             : [...state.allPosts];
         state.curPage = 1;
         state.sortField = 'id';
@@ -257,18 +257,10 @@
         }
 
         filterInput.addEventListener('input', onFilterInput);
-        prevBtn.addEventListener('click', function () {
-            goToPage(state.curPage - 1);
-        });
-        nextBtn.addEventListener('click', function () {
-            goToPage(state.curPage + 1);
-        });
-        sortIdTh.addEventListener('click', function () {
-            changeSorting('id');
-        });
-        sortTitleTh.addEventListener('click', function () {
-            changeSorting('title');
-        });
+        prevBtn.addEventListener('click', () => goToPage(state.curPage - 1));
+        nextBtn.addEventListener('click', () => goToPage(state.curPage + 1));
+        sortIdTh.addEventListener('click', () => changeSorting('id'));
+        sortTitleTh.addEventListener('click', () => changeSorting('title'));
     }
 
     init();
