@@ -1,5 +1,5 @@
 @media (max-width: 768px) {
-    .controls {
+    .filter-controls {
         padding: var(--spacing-md);
     }
 
