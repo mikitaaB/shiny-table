@@ -21,15 +21,14 @@
         return sortPosts(pageSlice, state.sortField, state.sortMode);
     }
 
+    function getAriaSort(field, sortField, sortMode) {
+        if (field !== sortField) return 'none';
+        return sortMode === 'asc' ? 'ascending' : 'descending';
+    }
+
     function updateAriaSort() {
-        const idSort = state.sortField === 'id'
-            ? state.sortMode === 'asc' ? 'ascending' : 'descending'
-            : 'none';
-        const titleSort = state.sortField === 'title'
-            ? state.sortMode === 'asc' ? 'ascending' : 'descending'
-            : 'none';
-        sortIdTh.setAttribute('aria-sort', idSort);
-        sortTitleTh.setAttribute('aria-sort', titleSort);
+        sortIdTh.setAttribute('aria-sort', getAriaSort('id', state.sortField, state.sortMode));
+        sortTitleTh.setAttribute('aria-sort', getAriaSort('title', state.sortField, state.sortMode));
     }
 
     function renderTableBody(posts) {
