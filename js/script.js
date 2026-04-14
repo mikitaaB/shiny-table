@@ -1,4 +1,6 @@
 (function () {
+    'use strict';
+
     const API_URL = 'https://jsonplaceholder.typicode.com/posts';
     const ITEMS_PER_PAGE = 10;
     const FLIP_TRANSITION_MS = 300;

@@ -1,3 +1,5 @@
+'use strict';
+
 function sortPosts(posts, field, direction) {
     return posts.sort((a, b) => {
         if (field === 'id') {
