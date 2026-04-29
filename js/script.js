@@ -1,17 +1,8 @@
 'use strict';
 
-const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 const ITEMS_PER_PAGE = 10;
 
 let tbody, filterInput, prevBtn, nextBtn, pageInfoSpan, sortIdTh, sortTitleTh;
-
-const state = {
-    allPosts: [],
-    curPage: 1,
-    sortField: 'id',
-    sortMode: 'asc',
-    searchValue: '',
-};
 
 function getFilteredPosts() {
     const searchValue = state.searchValue.trim().toLowerCase();
@@ -25,9 +16,7 @@ function getFilteredPosts() {
 }
 
 function getCurrentPagePosts() {
-    const start = (state.curPage - 1) * ITEMS_PER_PAGE;
-    const end = start + ITEMS_PER_PAGE;
-    const pageSlice = getFilteredPosts().slice(start, end);
+    const pageSlice = getPageSlice(getFilteredPosts(), state.curPage, ITEMS_PER_PAGE);
     return sortPosts(pageSlice, state.sortField, state.sortMode);
 }
 
@@ -84,7 +73,7 @@ function resetViewState() {
     updateAriaSort();
 }
 
-function renderView() {
+function render() {
     renderTableBody(getCurrentPagePosts());
     updatePagination(state, pageInfoSpan, prevBtn, nextBtn, ITEMS_PER_PAGE, getFilteredPosts().length);
     highlightRows(tbody);
@@ -92,7 +81,7 @@ function renderView() {
 
 function applyFilter() {
     resetViewState();
-    renderView();
+    render();
 }
 
 async function changeSorting(field) {
@@ -106,9 +95,7 @@ async function changeSorting(field) {
     }
     updateAriaSort();
 
-    const start = (state.curPage - 1) * ITEMS_PER_PAGE;
-    const end = start + ITEMS_PER_PAGE;
-    const rawPagePosts = getFilteredPosts().slice(start, end);
+    const rawPagePosts = getPageSlice(getFilteredPosts(), state.curPage, ITEMS_PER_PAGE);
     const newSortedPosts = sortPosts(rawPagePosts, state.sortField, state.sortMode);
 
     await reorderRowsWithFLIP(tbody, newSortedPosts);
@@ -119,9 +106,7 @@ function goToPage(page) {
     const totalPages = Math.ceil(getFilteredPosts().length / ITEMS_PER_PAGE);
     if (page < 1 || page > totalPages) return;
     state.curPage = page;
-    renderTableBody(getCurrentPagePosts());
-    updatePagination(state, pageInfoSpan, prevBtn, nextBtn, ITEMS_PER_PAGE, getFilteredPosts().length);
-    highlightRows(tbody);
+    render();
 }
 
 const debouncedApplyFilter = debounce(applyFilter);
@@ -151,17 +136,12 @@ function showErrorState(message) {
 
     showLoadingState();
     try {
-        const response = await fetch(API_URL);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const posts = await response.json();
-        state.allPosts = posts;
+        state.allPosts = await fetchPosts();
         state.curPage = 1;
         state.sortField = 'id';
         state.sortMode = 'asc';
         updateAriaSort();
-        renderTableBody(getCurrentPagePosts());
-        updatePagination(state, pageInfoSpan, prevBtn, nextBtn, ITEMS_PER_PAGE, getFilteredPosts().length);
-        highlightRows(tbody);
+        render();
     } catch (err) {
         console.error(err);
         showErrorState('Failed to load posts.');

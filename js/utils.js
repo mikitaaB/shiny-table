@@ -35,3 +35,8 @@ function updatePagination(state, pageInfoSpan, prevBtn, nextBtn, ITEMS_PER_PAGE,
     prevBtn.disabled = state.curPage <= 1;
     nextBtn.disabled = state.curPage >= totalPages;
 }
+
+function getPageSlice(items, page, perPage) {
+    const start = (page - 1) * perPage;
+    return items.slice(start, start + perPage);
+}
