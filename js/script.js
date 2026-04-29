@@ -82,9 +82,17 @@ function resetViewState() {
     state.sortField = 'id';
     state.sortMode = 'asc';
     updateAriaSort();
+}
+
+function renderView() {
     renderTableBody(getCurrentPagePosts());
     updatePagination(state, pageInfoSpan, prevBtn, nextBtn, ITEMS_PER_PAGE, getFilteredPosts().length);
     highlightRows(tbody);
+}
+
+function applyFilter() {
+    resetViewState();
+    renderView();
 }
 
 async function changeSorting(field) {
@@ -116,7 +124,7 @@ function goToPage(page) {
     highlightRows(tbody);
 }
 
-const debouncedApplyFilter = debounce(resetViewState);
+const debouncedApplyFilter = debounce(applyFilter);
 
 function onFilterInput(e) {
     state.searchValue = e.target.value;
