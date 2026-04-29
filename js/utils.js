@@ -1,13 +1,12 @@
 'use strict';
 
 function sortPosts(posts, field, direction) {
-    return posts.sort((a, b) => {
+    const dir = direction === 'asc' ? 1 : -1;
+    return [...posts].sort((a, b) => {
         if (field === 'id') {
-            return direction === 'asc' ? a.id - b.id : b.id - a.id;
-        } else {
-            const comparison = a.title.localeCompare(b.title);
-            return direction === 'asc' ? comparison : -comparison;
+            return (a.id - b.id) * dir;
         }
+        return a.title.localeCompare(b.title) * dir;
     });
 }
 
@@ -30,8 +29,8 @@ function highlightRows(tbody) {
     });
 }
 
-function updatePagination(state, pageInfoSpan, prevBtn, nextBtn, ITEMS_PER_PAGE) {
-    const totalPages = Math.ceil(state.filteredPosts.length / ITEMS_PER_PAGE) || 1;
+function updatePagination(state, pageInfoSpan, prevBtn, nextBtn, ITEMS_PER_PAGE, totalItems) {
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
     pageInfoSpan.textContent = `${state.curPage} of ${totalPages} pages`;
     prevBtn.disabled = state.curPage <= 1;
     nextBtn.disabled = state.curPage >= totalPages;
